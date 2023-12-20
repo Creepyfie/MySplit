@@ -24,6 +24,11 @@ public class GroupDAO {
     public List<Group> index(){
         return jdbcTemplate.query("Select * From Group", rowMapper);
     }
+
+    public Group show(int group_id){
+        return jdbcTemplate.query("Select * From Groups Where group_id = ?", new Object[]{group_id},rowMapper)
+                .stream().findAny().orElse(null);
+    }
     public List<Group> showPersonGroups(List<Person_Group> person_groups){
         List<Group> groupList = new ArrayList<>();
         for(Person_Group person_group: person_groups){

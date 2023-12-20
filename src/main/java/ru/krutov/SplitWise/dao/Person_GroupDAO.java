@@ -21,6 +21,14 @@ public class Person_GroupDAO {
         return jdbcTemplate.query("Select * From Person_Group Where phone = ?"
                 , new Object[]{phone}, rowMapper);
     }
+    public List<Person_Group> showGroupPeople(int group_id){
+        return jdbcTemplate.query("Select * From Person_Group Where group_id = ?"
+                , new Object[]{group_id}, rowMapper);
+    }
+
+    public void removeFromGroup(int group_id, String phone){
+        jdbcTemplate.update("DELETE FROM Person_Group Where group_id = ? AND phone = ?",group_id,phone);
+    }
 
 
     private static class Person_GroupRowMapper implements RowMapper<Person_Group> {

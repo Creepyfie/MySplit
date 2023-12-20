@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import ru.krutov.SplitWise.models.Group;
 import ru.krutov.SplitWise.models.Person;
+import ru.krutov.SplitWise.models.Person_Group;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -23,9 +26,22 @@ public class PersonDAO {
         return jdbcTemplate.query("Select * From Person", rowMapper);
     }
 
+    public void create(Person person){
+        jdbcTemplate.update("INSERT INTO Person(phone,name) Values(?,?)",person.getPhone(),person.getName());
+    }
+
     public Person show(String phone){
         return jdbcTemplate.query("Select * From Person Where phone = ?",
                 new Object[]{phone},rowMapper).stream().findAny().orElse(null);
+    }
+    public List<Person> showGroupPeople(List<Person_Group> person_groups){
+        List<Person> personList = new ArrayList<>();
+        for(Person_Group person_group: person_groups){
+            personList.add(jdbcTemplate.query("Select * From Person Where phone = ?",
+                            new Object[]{person_group.getPhone()}, rowMapper)
+                    .stream().findAny().orElse(null));
+        }
+        return personList;
     }
     public void update(String phone, Person person){
         jdbcTemplate.update("Update Person Set name = ? Where phone = ?",person.getName(),phone);

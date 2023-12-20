@@ -23,7 +23,7 @@
 <a th:href="@{/people/{phone}/edit(phone=${person.getPhone()})}">Изменить данные</a>
 
 
-<form th:method="DELETE" th:action="@{/people/{phone}(id=${person.getPhone()})}">
+<form th:method="DELETE" th:action="@{/people/{phone}(phone=${person.getPhone()})}">
 
     <input type = "submit" value="Удалить" />
 

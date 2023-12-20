@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Человек</title>
+</head>
+<body>
+
+<p th:text="${'Название группы: 'group.getName()}">Value</p>
+
+<div th:if="${not people.isEmpty()}">
+    <p>Участники группы: </p>
+    <div th:each="person :${people}">
+        <a th:href="@{/people/{phone}(phone = ${person.getPhone()})}"
+           th:text="${person.getName() + ' ,' + person.getPhone()}" >user</a>
+
+        <form th:method="DELETE" th:action="@{/groups/{group_id}/remove/{phone}(phone=${person.getPhone(), group_id=${group.getGroup_id()})}">
+            <input type = "submit" value="Удалить из группы" />
+    </div>
+</div>
+<div th:unless="${not people.isEmpty()}">
+    <p>В группе нет ни одного участника!</p>
+</div>
+<form th:method="PATCH" th:action = "@{/groups/{group_id}/addMember(group_id=${group.getGroup_id()})}">
+    <label for="person">Выберите нового участника</label>
+    <select th:object="${person}" th:field="*{phone}" id = "person">
+        <option th:each="person: ${allpeople}" th:value="${person.getPhone()}"
+                th:text="${person.getName()}"></option>
+    </select>
+
+    <input type="submit" value = "Добавить в группу!">
+</form>
+
+<hr/>
+<br/>
+<a th:href="@{/groups/{group_id}/addMember(group_id=${group.getGroup_id()})}">Добавить участника</a>
+
+
+<form th:method="DELETE" th:action="@{/people/{phone}(id=${person.getPhone()})}">
+
+    <input type = "submit" value="Удалить" />
+
+</form>
+</body>
+</html>

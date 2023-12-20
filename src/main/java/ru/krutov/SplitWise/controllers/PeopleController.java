@@ -26,7 +26,7 @@ public class PeopleController {
         this.groupDAO = groupDAO;
         this.personValidator = personValidator;
     }
-    @GetMapping
+    @GetMapping()
     public String index(Model model){
         model.addAttribute("people",personDAO.index());
         return "people/index";
@@ -41,6 +41,12 @@ public class PeopleController {
     @GetMapping("/new")
     public String newPerson(@ModelAttribute("person") Person person){
         return "people/new";
+    }
+
+    @PostMapping()
+    public String create(@ModelAttribute("person") Person person){
+        personDAO.create(person);
+        return "redirect:people";
     }
 
     @PatchMapping("{phone}/edit")

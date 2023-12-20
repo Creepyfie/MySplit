@@ -27,7 +27,12 @@ public class PersonDAO {
         return jdbcTemplate.query("Select * From Person Where phone = ?",
                 new Object[]{phone},rowMapper).stream().findAny().orElse(null);
     }
-
+    public void update(String phone, Person person){
+        jdbcTemplate.update("Update Person Set name = ? Where phone = ?",person.getName(),phone);
+    }
+    public void delete(String phone){
+        jdbcTemplate.update("Delete FROM Person where phone = ?", phone);
+    }
 
     private static class PersonRowMapper implements RowMapper<Person> {
 

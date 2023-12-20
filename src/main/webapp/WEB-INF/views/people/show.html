@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Человек</title>
 </head>
 <body>
 
+<p th:text="${'Имя: 'person.getName() + ', Номер телефона: ' + person.getPhone()}">Value</p>
+
+<div th:if="${not groups.isEmpty()}">
+    <p>Состоит в группах: </p>
+    <div th:each="group :${groups}">
+        <p th:text="${group.getBookName()}" >group</p>
+    </div>
+</div>
+<div th:unless="${not groups.isEmpty()}">
+    <p>Пока не состоит ни в одной группе</p>
+</div>
+
+<hr/>
+<br/>
+<a th:href="@{/people/{phone}/edit(phone=${person.getPhone()})}">Изменить данные</a>
+
+
+<form th:method="DELETE" th:action="@{/people/{phone}(id=${person.getPhone()})}">
+
+    <input type = "submit" value="Удалить" />
+
+</form>
 </body>
 </html>

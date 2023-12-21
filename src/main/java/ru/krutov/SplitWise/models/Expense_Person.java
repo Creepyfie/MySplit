@@ -11,6 +11,10 @@ public class Expense_Person {
         this.amount = amount;
     }
 
+    public Expense_Person() {
+
+    }
+
     public int getExpense_id() {
         return expense_id;
     }

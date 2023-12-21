@@ -6,22 +6,31 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/expenses/{group_id}(group_id=${group_id})}" th:object="${expense}">
+<form th:method="POST" th:action="@{/expenses/{group_id}(group_id=${group_id})}" >
 
     <label for="name">Введите название траты: </label>
-    <input type="text" th:field="*{name}" id="name"/>
+    <input type="text" th:object="${expense}" th:field="*{name}" id="name"/>
     <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error name</div>
     <br/>
     <label for="paidBy">Выберите платившего: </label>
-    <select th:field="*{paidBy}" id = "paidBy">
+    <select th:object="${expense}" th:field="*{paidBy}" id = "paidBy">
         <option th:each="person: ${group_people}" th:value="${person.getPhone()}"
                 th:text="${person.getName()}"></option>
     </select>
     <br/>
-    <label for="amount">Введите название траты: </label>
-    <input type="text" th:field="*{amount}" id="amount"/>
+    <label for="amount">Введите сумму траты: </label>
+    <input type="text" th:object="${expense}" th:field="*{amount}" id="amount"/>
     <div style="color:red" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Error amount</div>
     <br/>
+
+    <p>Введите трату каждого участника:</p>
+    <div th:each="person: ${group_people}">
+        <label for="member" th:text="${person.getName}">user</label>
+        <input type="text" th:object="${expense}" th:field="*{name}" id="member" value = "0.0"/>
+        <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error name</div>
+        <br/>
+    </div>
+
     <input type="submit" value="Создать!">
 </form>
 

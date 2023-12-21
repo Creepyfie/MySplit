@@ -34,15 +34,15 @@ public class PersonDAO {
         return jdbcTemplate.query("Select * From Person Where phone = ?",
                 new Object[]{phone},rowMapper).stream().findAny().orElse(null);
     }
-    public List<Person> showGroupPeople(List<Person_Group> person_groups){
-        List<Person> personList = new ArrayList<>();
-        for(Person_Group person_group: person_groups){
-            personList.add(jdbcTemplate.query("Select * From Person Where phone = ?",
-                            new Object[]{person_group.getPhone()}, rowMapper)
-                    .stream().findAny().orElse(null));
-        }
-        return personList;
-    }
+//    public List<Person> showGroupPeople(List<Person_Group> person_groups){
+//        List<Person> personList = new ArrayList<>();
+//        for(Person_Group person_group: person_groups){
+//            personList.add(jdbcTemplate.query("Select * From Person Where phone = ?",
+//                            new Object[]{person_group.getPhone()}, rowMapper)
+//                    .stream().findAny().orElse(null));
+//        }
+//        return personList;
+//    }
     public void update(String phone, Person person){
         jdbcTemplate.update("Update Person Set name = ? Where phone = ?",person.getName(),phone);
     }

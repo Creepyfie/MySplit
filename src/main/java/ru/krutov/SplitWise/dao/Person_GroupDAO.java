@@ -3,6 +3,7 @@ package ru.krutov.SplitWise.dao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import ru.krutov.SplitWise.models.Person;
 import ru.krutov.SplitWise.models.Person_Group;
 
 import java.sql.ResultSet;
@@ -30,15 +31,21 @@ public class Person_GroupDAO {
         jdbcTemplate.update("DELETE FROM Person_Group Where group_id = ? AND phone = ?",group_id,phone);
     }
 
+    public void addMember(int group_id, Person person){
+        jdbcTemplate.update("INSERT INTO Person_Group(group_id,phone,name) VALUES(?,?,?)"
+                ,group_id, person.getPhone(),person.getName());
+    }
+
 
     private static class Person_GroupRowMapper implements RowMapper<Person_Group> {
 
         @Override
         public Person_Group mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new Person_Group(
+                    rs.getInt("group_id"),
                     rs.getString("phone"),
-                    rs.getInt("group_id")
-            );
+                    rs.getString("name"),
+                    rs.getDouble("balance"));
         }
     }
 }

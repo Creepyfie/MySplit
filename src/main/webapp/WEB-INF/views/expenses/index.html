@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Траты для этой группы</title>
+</head>
+<body>
+
+<div th:each="expense :${expenses}">
+<a th:href="@{/expenses/{espense_id}(espense_id = ${expense.getExpense_id()})}"
+   th:text="${expense.getName() + ', ' + expense.getPaidBy() + ', ' + expense.getAmount()}" >expense</a>
+</div>
+<br/>
+<hr/>
+<a th:href="@{/expenses/{group_id}/add(group_id=${group_id})}">Добавить новую трату</a>
+</body>
+</html>

@@ -2,16 +2,16 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ВСе люди</title>
+    <title>Все группы</title>
 </head>
 <body>
 
-<div th:each="person :${people}">
-<a th:href="@{/people/{phone}(phone = ${person.getPhone()})}"
-   th:text="${person.getName() + ' ,' + person.getPhone()}" >user</a>
+<div th:each="group :${groups}">
+<a th:href="@{/groups/{group_id}(group_id = ${group.getGroup_id()})}"
+   th:text="${group.getName()}" >group</a>
 </div>
 <br/>
 <hr/>
-<a href="/people/new">Добавить человека</a>
+<a href="/group/new">Создать группу</a>
 </body>
 </html>

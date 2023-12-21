@@ -4,7 +4,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import ru.krutov.SplitWise.models.Group;
-import ru.krutov.SplitWise.models.Person;
 import ru.krutov.SplitWise.models.Person_Group;
 
 
@@ -39,6 +38,16 @@ public class GroupDAO {
         return groupList;
     }
 
+    public void delete(int group_id){
+        jdbcTemplate.update("DELETE FROM Groups WHERE group_id = ?", group_id);
+    }
+
+    public int create(Group group) {
+         jdbcTemplate.update("INSERT INTO Groups(name) VALUES (?)",group.getName());
+        return jdbcTemplate.query("Select group_id From Groups Where name = ?",
+                new Object[]{group.getName()},rowMapper)
+                .stream().findAny().orElse(null).getGroup_id();
+    }
 
 
     private static class GroupRowMapper implements RowMapper<Group> {

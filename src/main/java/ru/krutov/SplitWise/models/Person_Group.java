@@ -4,11 +4,24 @@ public class Person_Group {
     private String phone;
     private int group_id;
 
+    private String name;
+    private double balance;
+
     public Person_Group(){}
 
-    public Person_Group(String phone, int group_id) {
+    public Person_Group(int group_id, String phone, String name, double balance) {
         this.phone = phone;
         this.group_id = group_id;
+        this.name = name;
+        this.balance = balance;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     public int getGroup_id() {

@@ -19,7 +19,7 @@ public class Expense {
 
     public Expense(){}
 
-    public Expense(int expense_id, int group_id, String name, String paidBy, float amount) {
+    public Expense(int group_id, int expense_id,  String name, String paidBy, float amount) {
         this.expense_id = expense_id;
         this.group_id = group_id;
         this.name = name;

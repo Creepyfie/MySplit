@@ -12,8 +12,8 @@
     <input type="text" th:object="${expense}" th:field="*{name}" id="name"/>
     <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error name</div>
     <br/>
-    <label for="paidBy">Выберите платившего: </label>
-    <select th:object="${expense}" th:field="*{paidBy}" id = "paidBy">
+    <label for="paid_by">Выберите платившего: </label>
+    <select th:object="${expense}" th:field="*{paid_by}" id = "paid_by">
         <option th:each="person: ${group_people}" th:value="${person.getPhone()}"
                 th:text="${person.getName()}"></option>
     </select>
@@ -26,8 +26,12 @@
     <p>Введите трату каждого участника:</p>
     <div th:each="person: ${group_people}">
         <label for="member" th:text="${person.getName}">user</label>
-        <input type="text" th:object="${expense}" th:field="*{name}" id="member" value = "0.0"/>
-        <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error name</div>
+        <div th:each="exp_person: ${exp_people}">
+            <div th:if="${person.getPhone == exp_person.getPhone}">
+        <input type="text" th:object="${exp_person}" th:field="*{amount}" id="member" value = "0.0"/>
+        <div style="color:red" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Error name</div>
+            </div>
+        </div>
         <br/>
     </div>
 

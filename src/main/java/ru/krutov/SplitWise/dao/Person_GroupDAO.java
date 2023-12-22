@@ -3,6 +3,8 @@ package ru.krutov.SplitWise.dao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import ru.krutov.SplitWise.models.Expense;
+import ru.krutov.SplitWise.models.Expense_Person;
 import ru.krutov.SplitWise.models.Person;
 import ru.krutov.SplitWise.models.Person_Group;
 
@@ -34,6 +36,9 @@ public class Person_GroupDAO {
     public void addMember(int group_id, Person person){
         jdbcTemplate.update("INSERT INTO Person_Group(group_id,phone,name) VALUES(?,?,?)"
                 ,group_id, person.getPhone(),person.getName());
+    }
+
+    public void changeBalances(List<Expense_Person> exp_people, Expense expense) {
     }
 
 

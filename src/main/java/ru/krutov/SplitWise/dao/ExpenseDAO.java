@@ -24,6 +24,13 @@ public class ExpenseDAO {
                 new Object[]{group_id},rowMapper);
     }
 
+    public int addExpense(int group_id, Expense expense) {
+        jdbcTemplate.update("INSERT INTO Expense(group_id,name,paid_by,amount) VALUES (?,?,?,?)",
+                group_id, expense.getName(),expense.getPaid_by(),expense.getAmount());
+        return jdbcTemplate.query("Select * From Expense Where name = ?",
+                new Object[]{expense.getName()},rowMapper).stream().findAny().orElse(null).getExpense_id();
+    }
+
     private static class ExpenseRowMapper implements RowMapper<Expense> {
 
         @Override

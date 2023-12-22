@@ -26,3 +26,8 @@ CREATE TABLE Expense_Person(
     amount real check ( amount > 0 ) Default 0,
     PRIMARY KEY (expense_id,phone)
 );
+
+
+if(exp_person.getPhone().equals(expense.getPaid_by())){
+                exp_person.setAmount(-(exp_person.getAmount()+expense.getAmount()));
+            }

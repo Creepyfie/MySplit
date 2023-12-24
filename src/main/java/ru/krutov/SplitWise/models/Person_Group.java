@@ -5,22 +5,22 @@ public class Person_Group {
     private int group_id;
 
     private String name;
-    private double balance;
+    private float balance;
 
     public Person_Group(){}
 
-    public Person_Group(int group_id, String phone, String name, double balance) {
+    public Person_Group(int group_id, String phone, String name, float balance) {
         this.phone = phone;
         this.group_id = group_id;
         this.name = name;
         this.balance = balance;
     }
 
-    public double getBalance() {
+    public float getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(float balance) {
         this.balance = balance;
     }
 

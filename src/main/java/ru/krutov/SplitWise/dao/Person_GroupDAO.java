@@ -38,7 +38,25 @@ public class Person_GroupDAO {
                 ,group_id, person.getPhone(),person.getName());
     }
 
-    public void changeBalances(List<Expense_Person> exp_people, Expense expense) {
+    public void changeBalances(int group_id, List<Expense_Person> exp_people, Expense expense) {
+
+        for(Expense_Person exp_person: exp_people){
+            Person_Group person_group = jdbcTemplate.query("SELECT * FROM Person_Group Where group_id = ? And phone = ?",
+                    new Object[]{group_id,exp_person.getPhone()},rowMapper).stream().findAny().orElse(null);
+            float newBalance = person_group.getBalance();
+            if (exp_person.getPhone().equals(expense.getPaid_by()))
+            {
+                newBalance = newBalance + expense.getAmount();
+            }
+            newBalance = - exp_person.getAmount();
+            jdbcTemplate.update("UPDATE Person_Group(balance) VALUES (?) Where group_id = ? AND phone =?",newBalance,group_id,exp_person.getPhone());
+        }
+    }
+
+    public Person_Group showBalance(int group_id, String phone) {
+        return jdbcTemplate.query("SELECT * FROM Person_Group Where group_id = ? phone = ?",
+                new Object[]{group_id,phone},rowMapper).stream().findAny().orElse(null);
+
     }
 
 
@@ -50,7 +68,7 @@ public class Person_GroupDAO {
                     rs.getInt("group_id"),
                     rs.getString("phone"),
                     rs.getString("name"),
-                    rs.getDouble("balance"));
+                    rs.getFloat("balance"));
         }
     }
 }

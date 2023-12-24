@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.krutov.SplitWise.dao.BalanceBTWDAO;
 import ru.krutov.SplitWise.dao.ExpenseDAO;
 import ru.krutov.SplitWise.dao.Expense_PersonDAO;
 import ru.krutov.SplitWise.dao.Person_GroupDAO;
@@ -18,12 +19,14 @@ public class ExpensesController {
     private ExpenseDAO expenseDAO;
     private Person_GroupDAO person_groupDAO;
     private final Expense_PersonDAO expense_personDAO;
+    private final BalanceBTWDAO balanceBTWDAO;
 
     @Autowired
-    public ExpensesController(ExpenseDAO expenseDAO, Person_GroupDAO person_groupDAO, Expense_PersonDAO expense_personDAO) {
+    public ExpensesController(ExpenseDAO expenseDAO, Person_GroupDAO person_groupDAO, Expense_PersonDAO expense_personDAO, BalanceBTWDAO balanceBTWDAO) {
         this.expenseDAO = expenseDAO;
         this.person_groupDAO = person_groupDAO;
         this.expense_personDAO = expense_personDAO;
+        this.balanceBTWDAO = balanceBTWDAO;
     }
 
     @GetMapping("/{group_id}")
@@ -46,8 +49,8 @@ public class ExpensesController {
                              @ModelAttribute("expense") Expense expense){
         int expense_id = expenseDAO.addExpense(group_id,expense);
         expense_personDAO.addExpenses(exp_people, expense_id);
-        person_groupDAO.changeBalances(exp_people, expense);
-
+        person_groupDAO.changeBalances(group_id,exp_people, expense);
+        balanceBTWDAO.setDebt(group_id,exp_people,expense.getPaid_by(),expense.getAmount(), expense_id);
         return ("redirect:/expenses/"+group_id);
     }
 }

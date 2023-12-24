@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Баланс</title>
+</head>
+<body>
+
+<p th:text="${personBalance.getName + ', Ваш суммарный баланс = ' + personBalance.getBalance">Value</p>
+<p th:text="${'Балансы с другими участниками группы: '">Value</p>
+
+<div th:each="person :${withOther}">
+    <div th:each="group_person :${group_people}">
+        <div th:if="${(person.getPhone = group_person.getPhone)}">
+            <div th:if="${(person.getBalance > 0)}">
+                <a th:text="${'Пользователь ' + group_person.getName + 'должен Вам: ' + person.getBalance()}" >user</a>
+            </div>
+            <div th:if="${not (person.getBalance > 0)}">
+                <a th:text="${'Вы должны пользователю ' + group_person.getName + person.getBalance()}" >user</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr/>
+<br/>
+
+<form th:method="PATCH"
+      th:action="@{/balances/{group_id}}(group_id = ${personBalance.getGroup_id}">
+    <input type="submit" value="Распределить долги в группе">
+</form>
+
+</body>
+</html>

@@ -10,6 +10,7 @@ import ru.krutov.SplitWise.models.Person_Group;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -34,6 +35,7 @@ public class Person_GroupDAO {
     }
 
     public void addMember(int group_id, Person person){
+
         jdbcTemplate.update("INSERT INTO Person_Group(group_id,phone,name) VALUES(?,?,?)"
                 ,group_id, person.getPhone(),person.getName());
     }
@@ -48,8 +50,8 @@ public class Person_GroupDAO {
             {
                 newBalance = newBalance + expense.getAmount();
             }
-            newBalance = - exp_person.getAmount();
-            jdbcTemplate.update("UPDATE Person_Group(balance) VALUES (?) Where group_id = ? AND phone =?",newBalance,group_id,exp_person.getPhone());
+            newBalance = newBalance - exp_person.getAmount();
+            jdbcTemplate.update("UPDATE Person_Group SET balance = ? Where group_id = ? AND phone =?",newBalance,group_id,exp_person.getPhone());
         }
     }
 

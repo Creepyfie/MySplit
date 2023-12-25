@@ -21,7 +21,7 @@ public class GroupDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
     public List<Group> index(){
-        return jdbcTemplate.query("Select * From Group", rowMapper);
+        return jdbcTemplate.query("Select * From Groups", rowMapper);
     }
 
     public Group show(int group_id){
@@ -31,7 +31,7 @@ public class GroupDAO {
     public List<Group> showPersonGroups(List<Person_Group> person_groups){
         List<Group> groupList = new ArrayList<>();
         for(Person_Group person_group: person_groups){
-        groupList.add(jdbcTemplate.query("Select * From Group Where group_id = ?",
+        groupList.add(jdbcTemplate.query("Select * From Groups Where group_id = ?",
                 new Object[]{person_group.getGroup_id()}, rowMapper)
                 .stream().findAny().orElse(null));
         }
@@ -44,7 +44,7 @@ public class GroupDAO {
 
     public int create(Group group) {
          jdbcTemplate.update("INSERT INTO Groups(name) VALUES (?)",group.getName());
-        return jdbcTemplate.query("Select group_id From Groups Where name = ?",
+        return jdbcTemplate.query("Select * From Groups Where name = ?",
                 new Object[]{group.getName()},rowMapper)
                 .stream().findAny().orElse(null).getGroup_id();
     }

@@ -35,8 +35,20 @@ public class Expense_PersonDAO {
 
     public void addExpenses(List<Expense_Person> exp_people, int expense_id) {
         for(Expense_Person exp_person :exp_people){
+//сделать возможность исключить человека из траты
             jdbcTemplate.update("INSERT INTO Expense_Person(expense_id, phone, amount) VALUES (?,?,?)",
                     expense_id,exp_person.getPhone(),exp_person.getAmount());
+        }
+    }
+
+    public List<Expense_Person> showPeople(int expense_id) {
+        return jdbcTemplate.query("SELECT * FROM Expense_Person Where expense_id = ?", new Object[]{expense_id},rowMapper);
+    }
+
+    public void update(int expense_id, List<Expense_Person> exp_people) {
+        for(Expense_Person expense_person:exp_people){
+            jdbcTemplate.update("UPDATE Expense_Person SET amount = ? WHERE expense_id = ? AND phone = ?"
+                    ,expense_person.getAmount(),expense_id,expense_person.getPhone());
         }
     }
 

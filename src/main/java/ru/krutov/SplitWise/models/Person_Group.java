@@ -5,6 +5,7 @@ public class Person_Group {
     private int group_id;
 
     private String name;
+
     private float balance;
 
     public Person_Group(){}
@@ -14,6 +15,14 @@ public class Person_Group {
         this.group_id = group_id;
         this.name = name;
         this.balance = balance;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public float getBalance() {

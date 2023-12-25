@@ -6,12 +6,12 @@
 </head>
 <body>
 
-<p th:text="${'Имя: 'person.getName() + ', Номер телефона: ' + person.getPhone()}">Value</p>
+<p th:text="${'Имя: ' + person.getName() + ', Номер телефона: ' + person.getPhone()}">Value</p>
 
 <div th:if="${not groups.isEmpty()}">
     <p>Состоит в группах: </p>
     <div th:each="group :${groups}">
-        <p th:text="${group.getBookName()}" >group</p>
+        <p th:text="${group.getName()}" >group</p>
     </div>
 </div>
 <div th:unless="${not groups.isEmpty()}">

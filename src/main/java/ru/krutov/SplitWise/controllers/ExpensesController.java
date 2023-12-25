@@ -53,8 +53,32 @@ public class ExpensesController {
         balanceBTWDAO.setDebt(group_id,exp_people,expense.getPaid_by(),expense.getAmount(), expense_id);
         return ("redirect:/expenses/"+group_id);
     }
-    @GetMapping("/{espense_id}")
-    public String show(){
-        return "";
+    @GetMapping("/{expense_id}")
+    public String show(@PathVariable("expense_id") int expense_id, Model model) {
+        model.addAttribute("expense", expenseDAO.show(expense_id));
+        model.addAttribute("expense_people",expense_personDAO.showPeople(expense_id));
+
+        return "expenses/show";
+    }
+    @GetMapping("/{group_id}/{expense_id}/edit")
+    public String edit(@PathVariable("group_id") int group_id,@PathVariable("expense_id") int expense_id, Model model){
+        model.addAttribute("expense", expenseDAO.show(expense_id));
+        model.addAttribute("exp_people", expense_personDAO.showPeople(expense_id));
+        model.addAttribute("group_id",group_id);
+        return "expenses/edit";
+    }
+    @PatchMapping("/{expense_id}/edit")
+    public String update(@PathVariable("expense_id") int expense_id,@ModelAttribute("exp_people") List<Expense_Person> exp_people,
+                         @ModelAttribute("expense") Expense expense){
+        expenseDAO.update(expense_id,expense);
+        expense_personDAO.update(expense_id,exp_people);
+
+        return "expenses/edit";
+    }
+
+    @DeleteMapping("/{group_id}/{expense_id}")
+    public String delete(@PathVariable("expense_id") int expense_id,@PathVariable("group_id") int group_id){
+        expenseDAO.delete(expense_id);
+        return "redirect:/expenses/"+group_id;
     }
 }

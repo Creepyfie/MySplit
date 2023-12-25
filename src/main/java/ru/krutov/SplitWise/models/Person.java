@@ -13,9 +13,9 @@ public class Person {
 
     public Person(){}
 
-    public Person(String name, String phone) {
-        this.name = name;
+    public Person(String phone,String name) {
         this.phone = phone;
+        this.name = name;
     }
 
     public String getName() {

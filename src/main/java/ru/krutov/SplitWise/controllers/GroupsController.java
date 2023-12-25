@@ -40,6 +40,8 @@ public class GroupsController {
         model.addAttribute("group_people",person_groupDAO.showGroupPeople(group_id));
 //        model.addAttribute("people",personDAO.showGroupPeople(person_groupDAO.showGroupPeople(group_id)));
         model.addAttribute("allPeople",personDAO.index());
+        model.addAttribute("size",person_groupDAO.showGroupPeople(group_id).size());
+        model.addAttribute("person", new Person());
         return "groups/show";
     }
     @GetMapping("/new")
@@ -59,6 +61,9 @@ public class GroupsController {
     @PatchMapping("/{group_id}/addMember")
     public String addMember(@ModelAttribute("person")Person person, @PathVariable("group_id") int group_id){
         balanceBTWDAO.addMember(group_id, person.getPhone());
+        //костыль, в хибернейте не надо будет доставать имя человека, оно будет подтягиваться через id
+        person.setName(personDAO.show(person.getPhone()).getName());
+        //da
         person_groupDAO.addMember(group_id,person);
         return ("redirect:/groups/"+group_id);
     }

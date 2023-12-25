@@ -31,6 +31,20 @@ public class ExpenseDAO {
                 new Object[]{expense.getName()},rowMapper).stream().findAny().orElse(null).getExpense_id();
     }
 
+    public Expense show(int expense_id) {
+        return jdbcTemplate.query("SELECT * FROM Expense Where expense_id = ?",
+                new Object[]{expense_id},rowMapper).stream().findAny().orElse(null);
+    }
+
+    public void delete(int expense_id) {
+        jdbcTemplate.update("DELETE FROM Expense Where expense_id = ?", expense_id);
+    }
+
+    public void update(int expense_id, Expense expense) {
+        jdbcTemplate.update("UPDATE Expense SET name =?, paid_by = ?, amount = ? WHERE expense_id = ?"
+                ,expense.getName(),expense.getPaid_by(),expense.getAmount(),expense_id);
+    }
+
     private static class ExpenseRowMapper implements RowMapper<Expense> {
 
         @Override

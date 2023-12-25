@@ -6,9 +6,9 @@
 </head>
 <body>
 
-<p th:text="${'Название группы: 'group.getName()}">Value</p>
+<p th:text="${'Название группы: ' + group.getName()}">Value</p>
 
-<div th:if="${not people.isEmpty()}">
+<div th:if="${size > 0}">
     <p>Участники группы: </p>
     <div th:each="person :${group_people}">
         <a th:href="@{/people/{phone}(phone = ${person.getPhone()})}"
@@ -20,10 +20,12 @@
         </form>
     </div>
 </div>
-<div th:unless="${not people.isEmpty()}">
+<div th:unless="${size > 0}">
     <p>В группе нет ни одного участника!</p>
 </div>
-<form th:method="PATCH" th:action = "@{/groups/{group_id}/addMember(group_id=${group.getGroup_id()})}">
+</hr>
+</br>
+<form th:method="PATCH" th:action="@{/groups/{group_id}/addMember(group_id=${group.getGroup_id()})}">
     <label for="person">Выберите нового участника: </label>
     <select th:object="${person}" th:field="*{phone}" id = "person">
         <option th:each="person: ${allPeople}" th:value="${person.getPhone()}"

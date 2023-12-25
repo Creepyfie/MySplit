@@ -95,18 +95,18 @@ public class BalanceBTWDAO {
                         posNegBal.setBalance(posNegBal.getBalance()-difference);
                         negPosBal.setBalance(negPosBal.getBalance()+difference);
 
-                    jdbcTemplate.update("UPDATE BalanceBTW(balance) VALUES(?) WHERE group_id=? AND phone = ? AND otherPhone = ?"
+                    jdbcTemplate.update("UPDATE BalanceBTW SET balance = ? WHERE group_id=? AND phone = ? AND otherPhone = ?"
                             , positive.getBalance(),group_id, positive.getPhone(), positive.getOtherPhone());
-                    jdbcTemplate.update("UPDATE BalanceBTW(balance) VALUES(?) WHERE group_id=? AND phone = ? AND otherPhone = ?"
+                    jdbcTemplate.update("UPDATE BalanceBTW SET balance = ? WHERE group_id=? AND phone = ? AND otherPhone = ?"
                             , posPerBal.getBalance(),group_id, posPerBal.getPhone(), posPerBal.getOtherPhone());
-                    jdbcTemplate.update("UPDATE BalanceBTW(balance) VALUES(?) WHERE group_id=? AND phone = ? AND otherPhone = ?"
+                    jdbcTemplate.update("UPDATE BalanceBTW SET balance = ? WHERE group_id=? AND phone = ? AND otherPhone = ?"
                             , negative.getBalance(),group_id, negative.getPhone(), negative.getOtherPhone());
-                    jdbcTemplate.update("UPDATE BalanceBTW(balance) VALUES(?) WHERE group_id=? AND phone = ? AND otherPhone = ?"
+                    jdbcTemplate.update("UPDATE BalanceBTW SET balance = ? WHERE group_id=? AND phone = ? AND otherPhone = ?"
                             , negPerBal.getBalance(),group_id, negPerBal.getPhone(), negPerBal.getOtherPhone());
 
-                    jdbcTemplate.update("UPDATE BalanceBTW(balance) VALUES(?) WHERE group_id=? AND phone = ? AND otherPhone = ?"
+                    jdbcTemplate.update("UPDATE BalanceBTW SET balance = ? WHERE group_id=? AND phone = ? AND otherPhone = ?"
                             , posNegBal.getBalance(),group_id, posNegBal.getPhone(), posNegBal.getOtherPhone());
-                    jdbcTemplate.update("UPDATE BalanceBTW(balance) VALUES(?) WHERE group_id=? AND phone = ? AND otherPhone = ?"
+                    jdbcTemplate.update("UPDATE BalanceBTW SET balance = ? WHERE group_id=? AND phone = ? AND otherPhone = ?"
                             , negPosBal.getBalance(),group_id, negPosBal.getPhone(), negPosBal.getOtherPhone());
 
                 }

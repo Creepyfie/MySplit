@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Трата</title>
+</head>
+<body>
+
+<p th:text="${'Название траты: 'expense.getName() + ', Размер траты: ' + expense.getAmount()}">Value</p>
+
+
+  <p>Затраты участников: </p>
+  <div th:each="expense_person :${expense_people}">
+    <p th:text="${expense_person.getPhone() + ' - ' + expense_person.getAmount}" >group</p>
+  </div>
+
+<hr/>
+<br/>
+<a th:href="@{/expenses/{expense_id}/edit(expense_id=${expense.getExpense_id()})}">Редактировать трату</a>
+
+
+<form th:method="DELETE" th:action="@{/expenses/{group_id}/{expense_id}(group_id = expense.getGroup_id,expense_id=${expense.getExpense_id()})}">
+
+  <input type = "submit" value="Удалить трату" />
+
+</form>
+</body>
+</html>

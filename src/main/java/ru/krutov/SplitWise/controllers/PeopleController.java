@@ -48,7 +48,11 @@ public class PeopleController {
         personDAO.create(person);
         return "redirect:/people";
     }
-
+    @GetMapping("{phone}/edit")
+    public String edit(@PathVariable ("phone") String phone, Model model){
+        model.addAttribute("person",personDAO.show(phone));
+        return "people/edit";
+    }
     @PatchMapping("{phone}/edit")
     public String update(@PathVariable("phone") String phone,
                          @ModelAttribute("person") @Valid Person person, BindingResult bindingResult){

@@ -7,7 +7,7 @@
 <body>
 
 <div th:each="expense :${expenses}">
-<a th:href="@{/expenses/{espense_id}(espense_id = ${expense.getExpense_id()})}"
+<a th:href="@{/expenses/{expense_id}(expense_id = ${expense.getExpense_id()})}"
    th:text="${expense.getName() + ', ' + expense.getPaidBy() + ', ' + expense.getAmount()}" >expense</a>
 </div>
 <br/>

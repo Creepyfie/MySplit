@@ -44,7 +44,7 @@ public class PersonDAO {
 //        return personList;
 //    }
     public void update(String phone, Person person){
-        jdbcTemplate.update("Update Person Set name = ? Where phone = ?",person.getName(),phone);
+        jdbcTemplate.update("Update Person Set phone = ?, name = ? Where phone = ?",person.getPhone(), person.getName(),phone);
     }
     public void delete(String phone){
         jdbcTemplate.update("Delete FROM Person where phone = ?", phone);

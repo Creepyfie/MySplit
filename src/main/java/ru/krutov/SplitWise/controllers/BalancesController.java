@@ -31,6 +31,6 @@ public class BalancesController {
     @PatchMapping("/{group_id}")
     public String manageDebts(@PathVariable("group_id") int group_id){
         balanceBTWDAO.manageDebts(group_id);
-        return "redirect:/groups/"+group_id;
+        return "redirect:groups/"+group_id;
     }
 }

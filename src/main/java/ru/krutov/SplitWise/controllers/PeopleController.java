@@ -46,7 +46,7 @@ public class PeopleController {
     @PostMapping()
     public String create(@ModelAttribute("person") Person person){
         personDAO.create(person);
-        return "redirect:people";
+        return "redirect:/people";
     }
 
     @PatchMapping("{phone}/edit")

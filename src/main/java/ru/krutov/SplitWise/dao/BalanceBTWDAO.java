@@ -10,6 +10,7 @@ import ru.krutov.SplitWise.models.Person_Group;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class BalanceBTWDAO {
@@ -57,11 +58,70 @@ public class BalanceBTWDAO {
     }
 
     public void manageDebts(int group_id) {
-        List<BalanceBTW> balances = jdbcTemplate.query("SELECT * FROM BalanceBTW WHERE group_id = ?", new Object[]{group_id}, rowMapper);
-        for (BalanceBTW balance: balances){
+        List<Person_Group> group_people = person_groupDAO.showGroupPeople(group_id);
+
+        for(Person_Group person_group: group_people){
+            List<BalanceBTW> balances = jdbcTemplate.query("SELECT * FROM BalanceBTW WHERE group_id = ?", new Object[]{group_id}, rowMapper);
+
+            List<BalanceBTW> personBalances = balances.stream().filter(p -> p.getPhone() == person_group.getPhone())
+                                                .collect(Collectors.toList());
+            List<BalanceBTW> positiveBalances = personBalances.stream()
+                                            .filter(p -> p.getBalance() > 0)
+                                            .collect(Collectors.toList());
+            List<BalanceBTW> negativeBalances = personBalances.stream()
+                                            .filter(p -> p.getBalance() < 0)
+                                            .collect(Collectors.toList());
+            for(BalanceBTW positive: positiveBalances){
+                for(BalanceBTW negative: negativeBalances){
+                    BalanceBTW posNegBal = twoPersonsBalance(balances,positive.getOtherPhone(),negative.getOtherPhone());
+                    BalanceBTW negPosBal = twoPersonsBalance(balances,negative.getOtherPhone(),positive.getOtherPhone());
+                    BalanceBTW posPerBal = twoPersonsBalance(balances,positive.getOtherPhone(),positive.getPhone());
+                    BalanceBTW negPerBal = twoPersonsBalance(balances,negative.getOtherPhone(),negative.getPhone());
+                     float difference;
+                    if(positive.getBalance() + negative.getBalance()>= 0){
+                        difference = - negative.getBalance();
+                                    positive.setBalance(positive.getBalance()-difference);
+                                    negative.setBalance(0f);
+                                    posPerBal.setBalance(posPerBal.getBalance()+difference);
+                                    negPerBal.setBalance(0f);
+                        }
+                        else{
+                        difference = positive.getBalance();
+                            negative.setBalance(negative.getBalance()+difference);
+                            positive.setBalance(0f);
+                            negPerBal.setBalance(negPerBal.getBalance()-difference);
+                            posPerBal.setBalance(0f);
+                        }
+                        posNegBal.setBalance(posNegBal.getBalance()-difference);
+                        negPosBal.setBalance(negPosBal.getBalance()+difference);
+
+                    jdbcTemplate.update("UPDATE BalanceBTW(balance) VALUES(?) WHERE group_id=? AND phone = ? AND otherPhone = ?"
+                            , positive.getBalance(),group_id, positive.getPhone(), positive.getOtherPhone());
+                    jdbcTemplate.update("UPDATE BalanceBTW(balance) VALUES(?) WHERE group_id=? AND phone = ? AND otherPhone = ?"
+                            , posPerBal.getBalance(),group_id, posPerBal.getPhone(), posPerBal.getOtherPhone());
+                    jdbcTemplate.update("UPDATE BalanceBTW(balance) VALUES(?) WHERE group_id=? AND phone = ? AND otherPhone = ?"
+                            , negative.getBalance(),group_id, negative.getPhone(), negative.getOtherPhone());
+                    jdbcTemplate.update("UPDATE BalanceBTW(balance) VALUES(?) WHERE group_id=? AND phone = ? AND otherPhone = ?"
+                            , negPerBal.getBalance(),group_id, negPerBal.getPhone(), negPerBal.getOtherPhone());
+
+                    jdbcTemplate.update("UPDATE BalanceBTW(balance) VALUES(?) WHERE group_id=? AND phone = ? AND otherPhone = ?"
+                            , posNegBal.getBalance(),group_id, posNegBal.getPhone(), posNegBal.getOtherPhone());
+                    jdbcTemplate.update("UPDATE BalanceBTW(balance) VALUES(?) WHERE group_id=? AND phone = ? AND otherPhone = ?"
+                            , negPosBal.getBalance(),group_id, negPosBal.getPhone(), negPosBal.getOtherPhone());
+
+                }
+            }
+
 
         }
+
     }
+    public BalanceBTW twoPersonsBalance(List<BalanceBTW> balancesBTW, String phone, String otherPhone){
+            return balancesBTW.stream()
+                    .filter(p -> p.getPhone().equals(phone))
+                    .filter(p -> p.getPhone().equals(otherPhone))
+                    .findAny().orElse(null);
+            }
 
 
     private static class BalanceBTWRowMapper implements RowMapper<BalanceBTW> {

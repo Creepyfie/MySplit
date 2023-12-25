@@ -53,4 +53,8 @@ public class ExpensesController {
         balanceBTWDAO.setDebt(group_id,exp_people,expense.getPaid_by(),expense.getAmount(), expense_id);
         return ("redirect:/expenses/"+group_id);
     }
+    @GetMapping("/{espense_id}")
+    public String show(){
+        return "";
+    }
 }

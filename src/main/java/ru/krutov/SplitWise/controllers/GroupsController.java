@@ -30,8 +30,8 @@ public class GroupsController {
     }
 
     @GetMapping()
-    public String index(){
-        groupDAO.index();
+    public String index(Model model){
+        model.addAttribute("groups",groupDAO.index());
         return "groups/index";
     }
     @GetMapping("/{group_id}")

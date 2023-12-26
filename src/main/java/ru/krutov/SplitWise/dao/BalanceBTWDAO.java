@@ -23,6 +23,12 @@ public class BalanceBTWDAO {
         this.person_groupDAO = person_groupDAO;
     }
 
+    public void removeFromGroup(int group_id, String phone) {
+        jdbcTemplate.update("DELETE FROM BalanceBTW WHERE group_id = ? AND phone = ?",group_id,phone);
+        jdbcTemplate.update("DELETE FROM BalanceBTW WHERE group_id = ? AND otherPhone = ?",group_id,phone);
+
+    }
+
     public void addMember(int group_id, String phone) {
        List<Person_Group> group_people = person_groupDAO.showGroupPeople(group_id);
        if (!group_people.isEmpty()) {

@@ -56,6 +56,7 @@ public class GroupsController {
     @DeleteMapping("/{group_id}/remove/{phone}")
     public String removeMember(@PathVariable("group_id" )int group_id, @PathVariable("phone") String phone){
         person_groupDAO.removeFromGroup(group_id,phone);
+        balanceBTWDAO.removeFromGroup(group_id,phone);
         return ("redirect:/groups/"+group_id);
     }
     @PatchMapping("/{group_id}/addMember")

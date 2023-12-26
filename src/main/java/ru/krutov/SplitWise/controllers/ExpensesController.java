@@ -37,7 +37,7 @@ public class ExpensesController {
         this.expenseValidator = expenseValidator;
     }
 
-    @GetMapping("/{group_id}")
+    @GetMapping("/groups/{group_id}")
     public String index(@PathVariable("group_id") int group_id, Model model){
         model.addAttribute("expenses", expenseDAO.index(group_id));
         model.addAttribute("group_id",group_id);
@@ -66,8 +66,9 @@ public class ExpensesController {
         Expense_PersonDTO exp_people = new Expense_PersonDTO();
         List<Person_Group> group_people = person_groupDAO.showGroupPeople(group_id);
         for(Person_Group person_group: group_people){
-            exp_people.addPerson(new Expense_Person());
+            exp_people.addPerson(new Expense_Person(expense_id,person_group.getPhone()));
         }
+        model.addAttribute("expense_id",expense_id);
         model.addAttribute("group_id", group_id);
         model.addAttribute("group_people",group_people);
         model.addAttribute("exp_people",exp_people);
@@ -77,13 +78,18 @@ public class ExpensesController {
     @PostMapping("/manage/{group_id}/{expense_id}")
     public String manage(@PathVariable("group_id") int group_id,
                          @PathVariable("expense_id") int expense_id,
-                         @ModelAttribute("exp_people") List<Expense_Person> exp_people){
+                         @ModelAttribute("exp_people") Expense_PersonDTO expense_personDTO){
+        List<Expense_Person> exp_people = expense_personDAO.getPeople(group_id,expense_personDTO);
+        List<Person_Group> group_people = person_groupDAO.showGroupPeople(group_id);
+        for(Person_Group person_group: group_people){
+            exp_people.addPerson(new Expense_Person(expense_id,person_group.getPhone()));
+        }
         Expense expense = expenseDAO.show(expense_id);
         expense_personDAO.addExpenses(exp_people, expense_id);
         person_groupDAO.changeBalances(group_id,exp_people, expense);
         balanceBTWDAO.setDebt(group_id,exp_people,expense.getPaid_by()
                 ,expense.getAmount(), expense_id);
-        return "redirect:groups/";
+        return "redirect:/groups/";
     }
     @GetMapping("/{expense_id}")
     public String show(@PathVariable("expense_id") int expense_id, Model model) {
@@ -111,6 +117,6 @@ public class ExpensesController {
     @DeleteMapping("/{group_id}/{expense_id}")
     public String delete(@PathVariable("expense_id") int expense_id,@PathVariable("group_id") int group_id){
         expenseDAO.delete(expense_id);
-        return "redirect:/expenses/"+group_id;
+        return "redirect:/expenses/groups/"+group_id;
     }
 }

@@ -15,6 +15,11 @@ public class Expense_Person {
         this.phone = phone;
         this.amount = amount;
     }
+    public Expense_Person(int expense_id, String phone) {
+        this.expense_id = expense_id;
+        this.phone = phone;
+        this.amount = 0f;
+    }
 
     public Expense_Person() {
 

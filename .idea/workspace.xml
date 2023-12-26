@@ -9,17 +9,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9513821-67f0-45d7-9e5e-59cad0172f98" name="Changes" comment="Начата работа над тратой">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/models/Expense_PersonDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/validators/ExpenseValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/manage.html" afterDir="false" />
+    <list default="true" id="e9513821-67f0-45d7-9e5e-59cad0172f98" name="Changes" comment="Возникла проблема с отправлением данных">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/controllers/ExpensesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/controllers/ExpensesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/controllers/GroupsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/controllers/GroupsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/dao/BalanceBTWDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/dao/BalanceBTWDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/models/Expense.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/models/Expense.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/dao/Expense_PersonDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/dao/Expense_PersonDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/models/Expense_Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/models/Expense_Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/new.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/models/Expense_PersonDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/models/Expense_PersonDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/sql.text" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/sql.text" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/manage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/show.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/groups/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/groups/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +31,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -61,20 +62,26 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/MySplitWise/project/src/main/webapp/WEB-INF/views/expenses&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/SplitWise/MySplit/src/main/webapp/WEB-INF/views/balances&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;46f86faa6bbf9ac94a7e459509a20ed0&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;redshift&quot;,
+      &quot;postgresql&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\MySplitWise\project\src\main\webapp\WEB-INF\views\expenses" />
+      <recent name="D:\SplitWise\MySplit\src\main\webapp\WEB-INF\views\balances" />
+      <recent name="D:\SplitWise\MySplit\src\main\webapp\WEB-INF\views\groups" />
       <recent name="D:\MySplitWise\project\src\main\java\ru\krutov\SplitWise" />
       <recent name="D:\MySplitWise\project\src\main\webapp\WEB-INF\views\people" />
       <recent name="D:\MySplitWise\project\src\main\resources" />
-      <recent name="D:\MySplitWise\project\src\main\webapp" />
     </key>
   </component>
   <component name="RunManager">
@@ -88,7 +95,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="fd83350a-14fe-4bcc-896e-ab3f686d6698" />
+        <option name="BASE_DIRECTORY_NAME" value="44d0fae7-4036-4449-8229-2ee381311428" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -96,7 +103,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="51049" />
+        <option name="DEBUG_PORT" value="60509" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -175,6 +182,10 @@
       <option name="presentableId" value="Default" />
       <updated>1703059047825</updated>
       <workItem from="1703059050601" duration="3940000" />
+      <workItem from="1703077260440" duration="1824000" />
+      <workItem from="1703079379571" duration="5900000" />
+      <workItem from="1703324449178" duration="4940000" />
+      <workItem from="1703426290592" duration="5222000" />
     </task>
     <task id="LOCAL-00001" summary="Перенес в новый проект">
       <created>1703060247800</created>
@@ -208,9 +219,18 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/dao/BalanceBTWDAO.java</url>
-          <line>29</line>
+          <url>file://$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/controllers/PeopleController.java</url>
+          <line>55</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/dao/Person_GroupDAO.java</url>
+          <line>36</line>
+          <properties class="ru.krutov.SplitWise.dao.Person_GroupDAO" method="addMember">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

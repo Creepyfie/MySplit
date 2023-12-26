@@ -5,15 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/expenses/{group_id}(group_id=${group_id})}" th:object="${exp_people}">
+<form th:method="POST" th:action="@{/expenses/manage/{group_id}/{expense_id}(expense_id = ${expense_id},group_id=${group_id})}" th:object="${exp_people}">
     <p>Введите трату каждого участника:</p>
     <fieldset>
         <div th:each="person: ${group_people}">
             <label for="member" th:text="${person.getName()}">user</label>
             <div th:each="person, itemStat: *{people}">
-                <div th:if="${person.getPhone() == exp_person.getPhone()}">
-                    <td><input th:field="*{people[__${itemStat.index}__].amount}" id="member" value = "0.0"/></td>>
-                </div>
+                <div th:if="${person.getPhone() == person.getPhone()}">
+                    <input th:field="*{people[__${itemStat.index}__].amount}" id="member" value = "0.0"/>
+                </di v>
             </div>
             <br/>
         </div>

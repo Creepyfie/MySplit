@@ -3,8 +3,8 @@ package ru.krutov.SplitWise.dao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import ru.krutov.SplitWise.models.Expense;
 import ru.krutov.SplitWise.models.Expense_Person;
+import ru.krutov.SplitWise.models.Expense_PersonDTO;
 import ru.krutov.SplitWise.models.Person_Group;
 
 import java.sql.ResultSet;
@@ -17,9 +17,12 @@ public class Expense_PersonDAO {
     private final JdbcTemplate jdbcTemplate;
     private final RowMapper<Expense_Person> rowMapper = new Expense_PersonRowMapper();
 
+    private final Person_GroupDAO person_groupDAO;
 
-    public Expense_PersonDAO(JdbcTemplate jdbcTemplate) {
+
+    public Expense_PersonDAO(JdbcTemplate jdbcTemplate, Person_GroupDAO person_groupDAO) {
         this.jdbcTemplate = jdbcTemplate;
+        this.person_groupDAO = person_groupDAO;
     }
 
     public List<Expense_Person> showExpensePeople(List<Person_Group> showGroupPeople) {
@@ -50,6 +53,15 @@ public class Expense_PersonDAO {
             jdbcTemplate.update("UPDATE Expense_Person SET amount = ? WHERE expense_id = ? AND phone = ?"
                     ,expense_person.getAmount(),expense_id,expense_person.getPhone());
         }
+    }
+    //метод-костыль, поскльку возврашается почишенный список
+    public List<Expense_Person> getPeople(int group_id, Expense_PersonDTO expense_personDTO) {
+        List<Expense_Person> exp_people = expense_personDTO.getPeople();
+        List<Person_Group> group_people = person_groupDAO.showGroupPeople(group_id);
+        for(Person_Group person_group: group_people){
+            exp_people.
+        }
+        return exp_people;
     }
 
 

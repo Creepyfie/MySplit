@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<p th:text="${'Название траты: 'expense.getName() + ', Размер траты: ' + expense.getAmount()}">Value</p>
+<p th:text="${'Название траты: ' + expense.getName() + ', Размер траты: ' + expense.getAmount()}">Value</p>
 
 
   <p>Затраты участников: </p>
@@ -19,7 +19,7 @@
 <a th:href="@{/expenses/{expense_id}/edit(expense_id=${expense.getExpense_id()})}">Редактировать трату</a>
 
 
-<form th:method="DELETE" th:action="@{/expenses/{group_id}/{expense_id}(group_id = expense.getGroup_id,expense_id=${expense.getExpense_id()})}">
+<form th:method="DELETE" th:action="@{/expenses/{group_id}/{expense_id}(group_id = ${expense.getGroup_id()},expense_id=${expense.getExpense_id()})}">
 
   <input type = "submit" value="Удалить трату" />
 

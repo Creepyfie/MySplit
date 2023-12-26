@@ -15,7 +15,7 @@
            th:text="${person.getName() + ' ,' + person.getPhone()}" >user</a>
         <a th:href="@{/balances/{group_id}/{phone}(group_id=${group.getGroup_id()}, phone = ${person.getPhone()})}"
            th:text="${'Баланс: ' + person.getBalance()}" >balance</a>
-        <form th:method="DELETE" th:action="@{/groups/{group_id}/remove/{phone}(phone=${person.getPhone(), group_id=${group.getGroup_id()})}">
+        <form th:method="DELETE" th:action="@{/groups/{group_id}/remove/{phone}(phone=${person.getPhone()}, group_id=${group.getGroup_id()})}">
             <input type = "submit" value="Удалить из группы" />
         </form>
     </div>
@@ -38,9 +38,9 @@
 <hr/>
 <br/>
 
-<p th:href="@{/expenses/{group_id}(group_id=${group.getGroup_id()})}">Все Траты</p>
+<a th:href="@{/expenses/{group_id}(group_id=${group.getGroup_id()})}">Все Траты</a>
 
-<p th:href="@{/expenses/{group_id}/add(group_id=${group.getGroup_id()})}">Добавить трату</p>
+<a th:href="@{/expenses/{group_id}/add(group_id=${group.getGroup_id()})}">Добавить трату</a>
 
 <form th:method="DELETE" th:action="@{/groups/{group_id}(group_id=${group.getGroup_id()})}">
 

@@ -1,5 +1,10 @@
 package ru.krutov.SplitWise.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Expense_Person {
     private int expense_id;
     private String phone;

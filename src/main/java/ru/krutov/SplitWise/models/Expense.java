@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Size;
 public class Expense {
 
     private int expense_id;
-    @NotEmpty
     private int group_id;
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be btw 2 and 30 characters")
@@ -14,7 +13,6 @@ public class Expense {
     @NotEmpty(message = "phone should not be empty")
     @Size(min = 10, max = 10, message = "Name should be btw 2 and 30 characters")
     private String paid_by;
-    @NotEmpty
     private float amount;
 
     public Expense(){}

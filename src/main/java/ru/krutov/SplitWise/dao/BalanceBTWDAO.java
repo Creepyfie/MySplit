@@ -27,6 +27,7 @@ public class BalanceBTWDAO {
        List<Person_Group> group_people = person_groupDAO.showGroupPeople(group_id);
        if (!group_people.isEmpty()) {
            for (Person_Group group_person : group_people) {
+               jdbcTemplate.update("INSERT INTO BalanceBTW(group_id,phone,otherphone) VALUES(?,?,?)", group_id, group_person.getPhone(),phone);
                jdbcTemplate.update("INSERT INTO BalanceBTW(group_id,phone,otherphone) VALUES(?,?,?)", group_id, phone, group_person.getPhone());
            }
        }
@@ -54,7 +55,7 @@ public class BalanceBTWDAO {
     }
 
     public List<BalanceBTW> showPersonBalances(int group_id, String phone) {
-        return jdbcTemplate.query("SELECT * FROM BalancesBTW WHERE group_id = ? AND phone = ?", new Object[]{group_id,phone},rowMapper);
+        return jdbcTemplate.query("SELECT * FROM BalanceBTW WHERE group_id = ? AND phone = ?", new Object[]{group_id,phone},rowMapper);
     }
 
     public void manageDebts(int group_id) {

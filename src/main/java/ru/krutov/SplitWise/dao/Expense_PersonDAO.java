@@ -54,15 +54,6 @@ public class Expense_PersonDAO {
                     ,expense_person.getAmount(),expense_id,expense_person.getPhone());
         }
     }
-    //метод-костыль, поскльку возврашается почишенный список
-    public List<Expense_Person> getPeople(int group_id, Expense_PersonDTO expense_personDTO) {
-        List<Expense_Person> exp_people = expense_personDTO.getPeople();
-        List<Person_Group> group_people = person_groupDAO.showGroupPeople(group_id);
-        for(Person_Group person_group: group_people){
-            exp_people.
-        }
-        return exp_people;
-    }
 
 
     private static class Expense_PersonRowMapper implements RowMapper<Expense_Person> {

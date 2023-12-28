@@ -43,8 +43,8 @@ public class Person_GroupDAO {
     public void changeBalances(int group_id, List<Expense_Person> exp_people, Expense expense) {
 
         for(Expense_Person exp_person: exp_people){
-            Person_Group person_group = jdbcTemplate.query("SELECT * FROM Person_Group Where group_id = ? And phone = ?",
-                    new Object[]{group_id,exp_person.getPhone()},rowMapper).stream().findAny().orElse(null);
+            Person_Group person_group = jdbcTemplate.query("SELECT * FROM Person_Group Where group_id = ? And phone = ?",rowMapper,
+                    new Object[]{group_id,exp_person.getPhone()}).stream().findAny().orElse(null);
             float newBalance = person_group.getBalance();
             if (exp_person.getPhone().equals(expense.getPaid_by()))
             {
@@ -56,7 +56,7 @@ public class Person_GroupDAO {
     }
 
     public Person_Group showBalance(int group_id, String phone) {
-        return jdbcTemplate.query("SELECT * FROM Person_Group Where group_id = ? phone = ?",
+        return jdbcTemplate.query("SELECT * FROM Person_Group Where group_id = ? AND phone = ?",
                 new Object[]{group_id,phone},rowMapper).stream().findAny().orElse(null);
 
     }

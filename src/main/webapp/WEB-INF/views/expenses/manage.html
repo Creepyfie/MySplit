@@ -8,12 +8,15 @@
 <form th:method="POST" th:action="@{/expenses/manage/{group_id}/{expense_id}(expense_id = ${expense_id},group_id=${group_id})}" th:object="${exp_people}">
     <p>Введите трату каждого участника:</p>
     <fieldset>
-        <div th:each="person: ${group_people}">
-            <label for="member" th:text="${person.getName()}">user</label>
+        <div th:each="group_person, personStat: ${group_people}">
+            <label for="member" th:text="${group_person.getName()}">user</label>
             <div th:each="person, itemStat: *{people}">
-                <div th:if="${person.getPhone() == person.getPhone()}">
+                <div th:if="${itemStat.index == personStat.index}">
+
+                    <input style="display: none" th:field="*{people[__${itemStat.index}__].phone}" value = "${group_person.getPhone()}"/>
+                    <input style="display: none" th:field="*{people[__${itemStat.index}__].expense_id}" value = "${expense_id}"/>
                     <input th:field="*{people[__${itemStat.index}__].amount}" id="member" value = "0.0"/>
-                </di v>
+                </div>
             </div>
             <br/>
         </div>

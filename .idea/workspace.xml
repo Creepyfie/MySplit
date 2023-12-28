@@ -9,19 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9513821-67f0-45d7-9e5e-59cad0172f98" name="Changes" comment="Возникла проблема с отправлением данных">
+    <list default="true" id="e9513821-67f0-45d7-9e5e-59cad0172f98" name="Changes" comment="не работает нормально введение трат для каждого участника">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/controllers/ExpensesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/controllers/ExpensesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/controllers/GroupsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/controllers/GroupsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/dao/BalanceBTWDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/dao/BalanceBTWDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/dao/Expense_PersonDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/dao/Expense_PersonDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/models/Expense_Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/models/Expense_Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/models/Expense_PersonDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/models/Expense_PersonDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/dao/Person_GroupDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/dao/Person_GroupDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/sql.text" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/sql.text" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/balances/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/balances/show.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/manage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/expenses/show.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/groups/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/groups/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,6 +182,7 @@
       <workItem from="1703079379571" duration="5900000" />
       <workItem from="1703324449178" duration="4940000" />
       <workItem from="1703426290592" duration="5222000" />
+      <workItem from="1703680818807" duration="10458000" />
     </task>
     <task id="LOCAL-00001" summary="Перенес в новый проект">
       <created>1703060247800</created>
@@ -194,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703060247800</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="не работает нормально введение трат для каждого участника">
+      <created>1703620532002</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1703620532002</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,7 +217,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Перенес в новый проект" />
-    <option name="LAST_COMMIT_MESSAGE" value="Перенес в новый проект" />
+    <MESSAGE value="не работает нормально введение трат для каждого участника" />
+    <option name="LAST_COMMIT_MESSAGE" value="не работает нормально введение трат для каждого участника" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -223,14 +228,10 @@
           <line>55</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/dao/Person_GroupDAO.java</url>
-          <line>36</line>
-          <properties class="ru.krutov.SplitWise.dao.Person_GroupDAO" method="addMember">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="5" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ru/krutov/SplitWise/dao/BalanceBTWDAO.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
